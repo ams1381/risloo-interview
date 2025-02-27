@@ -1,4 +1,4 @@
-Total Spent time : 7h
+Total time spent : 7h
 
 
 
