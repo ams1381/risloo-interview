@@ -5,14 +5,29 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-color : #007BA4;
+  --gray1 : #F3F4F6;
+  --gray2 : #E5E7EB;
+  --gray3 : #D1D5DB;
+  --gray6 : #4B5563;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  src: url("../public/fonts/DanaVF.woff");
+  font-family: DanaVF;
 }
+
+
+* {
+  direction: rtl;
+  font-family: DanaVF;
+}
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --background: #0a0a0a;*/
+/*    --foreground: #ededed;*/
+/*  }*/
+/*}*/
 
 body {
   color: var(--foreground);

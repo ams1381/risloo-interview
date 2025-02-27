@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CounselingCentersList from '@/public/Risloo-Center-Sample.json'
 import '@/app/globals.css'
-import {CounselingCenterCard} from "@/components/molecules/CounselingCenterCard";
+import {CounselingCenterCard} from "@/components/molecules/counselingCenterCard/CounselingCenterCard";
 
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -32,6 +32,7 @@ export const Default: Story = {
         manageName : CounselingCentersList[0].manager.name,
         title : CounselingCentersList[0].detail.title,
         avatarUrl : CounselingCentersList[0].detail.avatar[0].url,
+        active : true,
         className : 'w-[300px]'
     },
 };

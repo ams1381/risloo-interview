@@ -1,25 +1,35 @@
 'use client'
 
-
 import {CloseIcon} from "@/components/atoms/icons/Close";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 import {useDebouncedSearch} from "@/hooks/useDebounceSearch";
+import {JsonSearchSchema} from "@/components/molecules/searchBox/JsonSchema";
+import {Input} from "@/components/atoms/input/Input";
 
-export const SearchBox = () => {
+type TSearchBox = {
+    placeholder? : string ,
+    searchInputName? : string,
+    searchInputTitle? : string,
+    className? : string ,
+    onChange? : (e : ChangeEvent<HTMLInputElement>) => void
+}
+
+export const SearchBox = (props : TSearchBox) => {
     const [search, setSearch] = useState('');
-    useDebouncedSearch(search, 600);
 
-    return <div className={'relative w-full'}>
-        <input
-            placeholder="جستجو"
-            title={'جستجوی مراکز'}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-2 border transition border-gray1 focus:shadow-md focus:border-primary outline-none rounded-lg"
-        />
-        {search.length ?
-            <span onClick={() => setSearch('')} className={'cursor-pointer absolute left-1 top-1/2 -translate-y-1/2'}>
+    useDebouncedSearch(setSearch,search, 600);
+
+    return <>
+        { search ? <JsonSearchSchema searchValue={search} /> : ''}
+        <div className={`relative w-full ${props.className ?? ''}`}>
+           <Input
+               value={search}
+               placeholder={'جستجو در نام مرکز یا نام مشاور'}
+               onChange={(e) => setSearch(e.target.value)} />
+            {search.length ?
+                <span onClick={() => setSearch('')} className={'cursor-pointer absolute left-1 top-1/2 -translate-y-1/2'}>
                 <CloseIcon width={20} height={20}/>
             </span> : <></>}
-    </div>
+        </div>
+    </>
 }

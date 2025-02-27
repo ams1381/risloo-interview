@@ -6,11 +6,14 @@ type TCounselingCenterCardProps = {
     title : string ,
     manageName : string,
     id : string ,
-    className? : string
+    className? : string,
+    active : boolean
 }
 
 export const CounselingCenterCard = (props : TCounselingCenterCardProps) => {
-    return <div className={`border border-gray2 flex flex-col justify-between transition overflow-hidden group pb-2 hover:border-primary rounded-lg ${props.className}`}>
+    return <div className={`relative border border-gray2 flex flex-col justify-between transition overflow-hidden group pb-2
+                hover:border-primary rounded-lg ${props.className}`}>
+        <div className={`w-[10px] h-[10px] absolute top-2 left-2 rounded-full ${props.active ? 'bg-[#02d902]' : 'bg-[red]'}`} />
         <div>
             <div className="h-24 bg-gray1 border-b border-gray2 "></div>
             <div className="flex justify-center transition items-center flex-shrink-0 w-24 h-24 mx-auto -mt-12 bg-gray3 text-gray6 rounded-full border-4 border-white overflow-hidden">
