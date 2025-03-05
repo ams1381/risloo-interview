@@ -7,6 +7,8 @@ import {CounselingCenterCard} from "@/components/molecules/counselingCenterCard/
 import {CounselingJsonSchema} from "@/components/organisms/counselingCenterList/JsonSchema";
 import {EmptyListPlaceholder} from "@/components/molecules/EmptyListPlaceholder";
 import {CounselingCenterBlog} from "@/components/molecules/CounselingCenterBlog";
+import Link from "next/link";
+import {Pagination} from "@/components/molecules/Pagination";
 
 const searchInCounselItem = (Item: TCounselingCenterItem, searchValue: string)  =>
     Item.detail.title.includes(searchValue) || Item.manager.name?.includes(searchValue)
@@ -17,9 +19,9 @@ const getInitialList = (searchValue?: string)  => {
     return CounselingCentersList;
 }
 
-export const CounselingCenterList = ({ searchValue , className }: { searchValue?: string , className? : string }) => {
+export const CounselingCenterList = ({ searchValue , className , page }: { searchValue?: string , className? : string , page? : string }) => {
     const [counselingList, setCounselingList] = useState(() => getInitialList(searchValue));
-    const [visibleCount, setVisibleCount] = useState(10);
+    const [visibleCount, setVisibleCount] = useState(page ? Number(page) * 10 :10);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -49,9 +51,12 @@ export const CounselingCenterList = ({ searchValue , className }: { searchValue?
                                               avatarUrl={Item.detail.avatar.length ? Item.detail.avatar[Item.detail.avatar.length - 1].url : null}/>
                     ))}
                     {visibleCount < counselingList.length && (
-                        <div className="col-span-full flex justify-center py-2">
-                            <Button onClick={loadMore} isLoading={loading}>مشاهده بیشتر</Button>
-                        </div>
+                        <>
+                            <Pagination pageSize={10} className={'hidden'} total={CounselingCentersList.length}  />
+                            <div className="col-span-full flex justify-center py-2">
+                                <Button onClick={loadMore} isLoading={loading}>مشاهده بیشتر</Button>
+                            </div>
+                        </>
                     )}
                 </>
             ) : <EmptyListPlaceholder />}

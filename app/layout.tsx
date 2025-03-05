@@ -3,7 +3,7 @@ import "./globals.css";
 import React from "react";
 
 
-
+// Meta tags to meet the needs of seo
 export const metadata: Metadata = {
     title: "لیست مراکز مشاوره ریسلو",
     description: "یک متن تستی برای متا دسکریپشن ریسلو",
